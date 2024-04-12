@@ -3,7 +3,11 @@ NAME	= philo
 CC = gcc
 CFLAGS= # -Wall -Werror -Wextra
 
-SRC =	philo.c
+SRC =	philo.c\
+		input.c\
+		errors.c\
+		init_philo.c\
+		utils/ft_atoi.c\
 
 SRCS = $(addprefix ./, $(SRC))
 

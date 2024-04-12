@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.c                                            :+:      :+:    :+:   */
+/*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dximenez <dximenez@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/11 13:43:25 by dximenez          #+#    #+#             */
-/*   Updated: 2024/04/12 19:14:42 by dximenez         ###   ########.fr       */
+/*   Created: 2024/04/12 19:14:11 by dximenez          #+#    #+#             */
+/*   Updated: 2024/04/12 19:18:25 by dximenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int main(int ac, char *av[])
+void	input_error(void)
 {
-	if (!check_input(ac, av))
-		return (input_error(), 0);
+	printf("Input error.\n");
 }
