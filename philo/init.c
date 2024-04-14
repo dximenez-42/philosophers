@@ -6,7 +6,7 @@
 /*   By: dximenez <dximenez@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 19:24:00 by dximenez          #+#    #+#             */
-/*   Updated: 2024/04/14 19:32:33 by dximenez         ###   ########.fr       */
+/*   Updated: 2024/04/14 20:24:53 by dximenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ static void	init_philos(t_program *pr)
 		else
 			pr->philos[i].l_fork = i;
 		pthread_mutex_init(&pr->philos[i].pause, NULL);
+		pr->philos[i].pr = pr;
 		++i;
 	}
 }
