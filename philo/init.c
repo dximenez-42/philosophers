@@ -6,7 +6,7 @@
 /*   By: dximenez <dximenez@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 19:24:00 by dximenez          #+#    #+#             */
-/*   Updated: 2024/04/14 16:22:34 by dximenez         ###   ########.fr       */
+/*   Updated: 2024/04/14 16:46:28 by dximenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,19 @@ static void	init_philos(t_program *pr)
 	}
 }
 
-void	init_program(t_program *pr, int amount)
+void	init_program(t_program *pr, int amount, int ac, char *av[])
 {
 	int	i;
 	
 	i = 0;
 	pr->dead_flag = 0;
+	pr->time_to_die = ft_atoi(av[2]);
+	pr->time_to_eat = ft_atoi(av[3]);
+	pr->time_to_eat = ft_atoi(av[4]);
+	if (ac == 6)
+		pr->num_times_to_eat = ft_atoi(av[5]);
+	else
+		pr->num_times_to_eat = -1;
 	pr->philo_size = amount;
 	pthread_mutex_init(&pr->dead_lock, NULL);
 	pthread_mutex_init(&pr->meal_lock, NULL);

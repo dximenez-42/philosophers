@@ -6,7 +6,7 @@
 /*   By: dximenez <dximenez@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 13:44:31 by dximenez          #+#    #+#             */
-/*   Updated: 2024/04/14 16:27:49 by dximenez         ###   ########.fr       */
+/*   Updated: 2024/04/14 16:48:39 by dximenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ long long	get_time(void);
 int			check_input(int ac, char *av[]);
 
 // Init
-void		init_program(t_program *pr, int amount);
+void		init_program(t_program *pr, int amount, int ac, char *av[]);
 
 // Errors
 void		input_error(void);

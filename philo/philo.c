@@ -6,7 +6,7 @@
 /*   By: dximenez <dximenez@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 13:43:25 by dximenez          #+#    #+#             */
-/*   Updated: 2024/04/14 11:33:46 by dximenez         ###   ########.fr       */
+/*   Updated: 2024/04/14 16:49:00 by dximenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,5 @@ int main(int ac, char *av[])
 	pr = malloc(sizeof(t_program));
 	if (pr == NULL)
 		return (1);
-	init_program(pr, ft_atoi(av[1]));
+	init_program(pr, ft_atoi(av[1]), ac, av);
 }
