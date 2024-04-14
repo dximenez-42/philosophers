@@ -6,7 +6,7 @@
 /*   By: dximenez <dximenez@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 13:44:31 by dximenez          #+#    #+#             */
-/*   Updated: 2024/04/14 20:24:33 by dximenez         ###   ########.fr       */
+/*   Updated: 2024/04/14 21:21:59 by dximenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef struct s_philo
 	size_t				l_fork;
 	size_t				r_fork;
 	pthread_mutex_t		pause;
-	void				*pr;
+	struct s_program	*pr;
 }						t_philo;
 
 typedef struct s_program
