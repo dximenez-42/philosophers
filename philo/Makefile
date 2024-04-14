@@ -1,12 +1,13 @@
 NAME	= philo
 
 CC = gcc
-CFLAGS= # -Wall -Werror -Wextra
+CFLAGS= -g3 # -Wall -Werror -Wextra
 
 SRC =	philo.c\
 		input.c\
 		errors.c\
-		init_philo.c\
+		init.c\
+		actions.c\
 		utils/ft_atoi.c\
 
 SRCS = $(addprefix ./, $(SRC))
