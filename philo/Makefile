@@ -8,6 +8,7 @@ SRC =	philo.c\
 		errors.c\
 		init.c\
 		actions.c\
+		loop.c\
 		utils/ft_atoi.c\
 
 SRCS = $(addprefix ./, $(SRC))

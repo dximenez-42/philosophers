@@ -6,7 +6,7 @@
 /*   By: dximenez <dximenez@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 13:44:31 by dximenez          #+#    #+#             */
-/*   Updated: 2024/04/14 16:48:39 by dximenez         ###   ########.fr       */
+/*   Updated: 2024/04/14 20:06:18 by dximenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct s_philo
 	long long			time_remain;
 	size_t				l_fork;
 	size_t				r_fork;
-	struct t_program	*pr;
+	pthread_mutex_t		pause;
 }						t_philo;
 
 typedef struct s_program
@@ -51,7 +51,7 @@ typedef struct s_program
 	long long		time_to_die;
 	long long		time_to_eat;
 	long long		time_to_sleep;
-	long long		num_times_to_eat;
+	long long		num_meals;
 	long long		start_time;
 	pthread_mutex_t	dead_lock;
 	pthread_mutex_t	meal_lock;
@@ -62,15 +62,15 @@ typedef struct s_program
 }					t_program;
 
 long long	get_time(void);
-
+void		show_message(t_program *pr, t_philo *ph, int type);
 int			check_input(int ac, char *av[]);
 
-// Init
 void		init_program(t_program *pr, int amount, int ac, char *av[]);
 
-// Errors
-void		input_error(void);
+int			start_loop(t_program *pr);
+void		perform_actions(t_program *pr, t_philo *ph);
 
+void		input_error(void);
 int			ft_atoi(char *s);
 
 #endif

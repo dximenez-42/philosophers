@@ -6,7 +6,7 @@
 /*   By: dximenez <dximenez@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 19:24:00 by dximenez          #+#    #+#             */
-/*   Updated: 2024/04/14 16:46:28 by dximenez         ###   ########.fr       */
+/*   Updated: 2024/04/14 19:32:33 by dximenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ static void	init_philos(t_program *pr)
 	while (i < size)
 	{
 		pr->start_time = get_time();
-		pr->philos[i].pr = (struct t_program *) pr;
 		pr->philos[i].id = i + 1;
 		pr->philos[i].eating = 0;
 		pr->philos[i].meals_eaten = 0;
@@ -46,6 +45,7 @@ static void	init_philos(t_program *pr)
 			pr->philos[i].l_fork = size - 1;
 		else
 			pr->philos[i].l_fork = i;
+		pthread_mutex_init(&pr->philos[i].pause, NULL);
 		++i;
 	}
 }
@@ -60,9 +60,9 @@ void	init_program(t_program *pr, int amount, int ac, char *av[])
 	pr->time_to_eat = ft_atoi(av[3]);
 	pr->time_to_eat = ft_atoi(av[4]);
 	if (ac == 6)
-		pr->num_times_to_eat = ft_atoi(av[5]);
+		pr->num_meals = ft_atoi(av[5]);
 	else
-		pr->num_times_to_eat = -1;
+		pr->num_meals = -1;
 	pr->philo_size = amount;
 	pthread_mutex_init(&pr->dead_lock, NULL);
 	pthread_mutex_init(&pr->meal_lock, NULL);
