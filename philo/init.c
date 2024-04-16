@@ -6,49 +6,63 @@
 /*   By: dximenez <dximenez@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 19:24:00 by dximenez          #+#    #+#             */
-/*   Updated: 2024/04/14 20:24:53 by dximenez         ###   ########.fr       */
+/*   Updated: 2024/04/16 12:25:51 by dximenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static void	init_forks(t_program *pr)
+void	ft_usleep(int ms)
 {
-	size_t	i;
-	size_t	size;
+	long int	time;
 
-	i = 0;
-	size = pr->philo_size;
-	while (i < size)
-	{
-		pthread_mutex_init(&pr->forks[i], NULL);
-		++i;
-	}
+	time = get_time();
+	while (get_time() - time < ms)
+		usleep(ms / 10);
 }
 
-static void	init_philos(t_program *pr)
+void	*init_thread(void *arg)
+{
+	pthread_t	thread;
+	t_philo	*ph;
+
+	ph = arg;
+	if (ph->id % 2 == 0)
+		ft_usleep(ph->pr->time_to_eat / 10);
+	ph->last_meal = get_time();
+	ph->time_remain = ph->last_meal + ph->pr->time_to_die;
+	if (pthread_create(&thread, NULL, alive_checker, ph) != 0)
+		return ((void *) 1);
+	if (pthread_create(&thread, NULL, meals_checker, ph) != 0)
+		return ((void *) 1);
+	while (1)
+		perform_actions(ph->pr, ph);
+}
+
+static int	init_philos(t_program *pr)
 {
 	size_t	i;
 	size_t	size;
 
-	i = 0;
+	i = -1;
 	size = pr->philo_size;
-	while (i < size)
+	while (++i < size)
 	{
 		pr->start_time = get_time();
 		pr->philos[i].id = i + 1;
-		pr->philos[i].eating = 0;
-		pr->philos[i].meals_eaten = 0;
-		pr->philos[i].last_meal = 0;
 		pr->philos[i].r_fork = i + 1;
-		if (i == 0)
-			pr->philos[i].l_fork = size - 1;
-		else
-			pr->philos[i].l_fork = i;
+		pr->philos[i].l_fork = i % pr->philo_size;
+		pthread_mutex_init(&pr->forks[i], NULL);
 		pthread_mutex_init(&pr->philos[i].pause, NULL);
 		pr->philos[i].pr = pr;
-		++i;
+		if (pthread_create(&pr->philos[i].thread, NULL,
+			init_thread, &pr->philos[i]) != 0)
+			return (0);
 	}
+	i = 0;
+	while (i < pr->philo_size)
+		pthread_join(pr->philos[i++].thread, NULL);
+	return (1);
 }
 
 void	init_program(t_program *pr, int amount, int ac, char *av[])
@@ -69,5 +83,4 @@ void	init_program(t_program *pr, int amount, int ac, char *av[])
 	pthread_mutex_init(&pr->meal_lock, NULL);
 	pthread_mutex_init(&pr->write_lock, NULL);
 	init_philos(pr);
-	init_forks(pr);
 }

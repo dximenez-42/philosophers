@@ -1,7 +1,7 @@
 NAME	= philo
 
 CC = gcc
-CFLAGS= -g3 # -Wall -Werror -Wextra
+CFLAGS= -g3 -fsanitize=thread # -Wall -Werror -Wextra
 
 SRC =	philo.c\
 		input.c\

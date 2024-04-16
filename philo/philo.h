@@ -6,7 +6,7 @@
 /*   By: dximenez <dximenez@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 13:44:31 by dximenez          #+#    #+#             */
-/*   Updated: 2024/04/14 21:21:59 by dximenez         ###   ########.fr       */
+/*   Updated: 2024/04/16 12:25:46 by dximenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ void		show_message(t_program *pr, t_philo *ph, int type);
 int			check_input(int ac, char *av[]);
 
 void		init_program(t_program *pr, int amount, int ac, char *av[]);
+void		*alive_checker(void *p);
+void		*meals_checker(void *p);
 
 int			start_loop(t_program *pr);
 void		perform_actions(t_program *pr, t_philo *ph);

@@ -6,7 +6,7 @@
 /*   By: dximenez <dximenez@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 13:43:25 by dximenez          #+#    #+#             */
-/*   Updated: 2024/04/14 19:25:14 by dximenez         ###   ########.fr       */
+/*   Updated: 2024/04/16 19:24:58 by dximenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ long long	get_time(void)
 
 void	show_message(t_program *pr, t_philo *ph, int type)
 {
+	pthread_mutex_lock(&pr->write_lock);
 	printf("%llu\t", (get_time() - pr->start_time));
 	if (type == FORK)
 		printf("%d has taken a fork\n", ph->id);
@@ -33,6 +34,7 @@ void	show_message(t_program *pr, t_philo *ph, int type)
 		printf("%d is sleeping\n", ph->id);
 	else if (type == DEAD)
 		printf("%d died\n", ph->id);
+	pthread_mutex_unlock(&pr->write_lock);
 }
 
 int main(int ac, char *av[])
@@ -42,7 +44,5 @@ int main(int ac, char *av[])
 	if (!check_input(ac, av))
 		return (input_error(), 0);
 	init_program(&pr, ft_atoi(av[1]), ac, av);
-	if (start_loop(&pr) == 0)
-		printf("Error in the loop.\n");
 	pthread_mutex_lock(&pr.dead_lock);
 }
