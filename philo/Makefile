@@ -1,7 +1,7 @@
 NAME	= philo
 
 CC = gcc
-CFLAGS= -g3 -fsanitize=thread # -Wall -Werror -Wextra
+CFLAGS= -g3 #-fsanitize=thread # -Wall -Werror -Wextra
 
 SRC =	philo.c\
 		input.c\
@@ -24,7 +24,7 @@ all: $(NAME)
 
 $(NAME): $(NORMAL_OBJS)
 	# make -C printf
-	$(CC) $(NORMAL_OBJS) $(PRINTF) $(LIBS) -I philo.h -o $(NAME) -v
+	$(CC) $(CFLAGS) $(NORMAL_OBJS) $(PRINTF) $(LIBS) -I philo.h -o $(NAME) -v
 
 %.o:%.c
 	$(CC) $(CFLAGS) -c $< -o $@ 

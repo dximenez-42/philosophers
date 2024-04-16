@@ -6,7 +6,7 @@
 /*   By: dximenez <dximenez@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 15:55:30 by dximenez          #+#    #+#             */
-/*   Updated: 2024/04/15 19:52:29 by dximenez         ###   ########.fr       */
+/*   Updated: 2024/04/16 19:53:51 by dximenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,11 @@
 
 static void	p_take_forks(t_program *pr, t_philo *ph)
 {
-	pthread_mutex_lock(&pr->forks[ph->l_fork]);
-	show_message(pr, ph, FORK);
+	if (ph->l_fork != -1)
+	{
+		pthread_mutex_lock(&pr->forks[ph->l_fork]);
+		show_message(pr, ph, FORK);
+	}
 	pthread_mutex_lock(&pr->forks[ph->r_fork]);
 	show_message(pr, ph, FORK);
 }

@@ -6,7 +6,7 @@
 /*   By: dximenez <dximenez@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 19:24:00 by dximenez          #+#    #+#             */
-/*   Updated: 2024/04/16 12:25:51 by dximenez         ###   ########.fr       */
+/*   Updated: 2024/04/16 20:08:29 by dximenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void	*init_thread(void *arg)
 		return ((void *) 1);
 	if (pthread_create(&thread, NULL, meals_checker, ph) != 0)
 		return ((void *) 1);
+	// if (ph->id % 2 == 0)
+	// 	usleep(100000);
 	while (1)
 		perform_actions(ph->pr, ph);
 }
@@ -46,12 +48,23 @@ static int	init_philos(t_program *pr)
 
 	i = -1;
 	size = pr->philo_size;
+	pr->start_time = get_time();
 	while (++i < size)
 	{
-		pr->start_time = get_time();
 		pr->philos[i].id = i + 1;
-		pr->philos[i].r_fork = i + 1;
-		pr->philos[i].l_fork = i % pr->philo_size;
+		if (size == 1)
+		{
+			pr->philos[i].r_fork = 0;
+			pr->philos[i].l_fork = -1;
+		}
+		if (size > 1)
+		{
+			pr->philos[i].r_fork = i;
+			if (i == 0)
+				pr->philos[i].l_fork = pr->philo_size - 1;
+			else
+				pr->philos[i].l_fork = i - 1;
+		}
 		pthread_mutex_init(&pr->forks[i], NULL);
 		pthread_mutex_init(&pr->philos[i].pause, NULL);
 		pr->philos[i].pr = pr;
