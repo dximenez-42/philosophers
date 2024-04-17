@@ -6,7 +6,7 @@
 /*   By: dximenez <dximenez@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 18:51:23 by dximenez          #+#    #+#             */
-/*   Updated: 2024/04/17 20:33:29 by dximenez         ###   ########.fr       */
+/*   Updated: 2024/04/17 20:47:15 by dximenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	*alive_checker(void *p)
 	while (1)
 	{
 		pthread_mutex_lock(&ph->pause);
-		if (ph->time_remain < get_time())
+		if (ph->time_remain < get_time() && ph->meals_eaten == 0)
 		{
 			show_message(ph->pr, ph, DEAD);
 			pthread_mutex_lock(&ph->pr->write_lock);
