@@ -6,13 +6,13 @@
 /*   By: dximenez <dximenez@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 19:24:00 by dximenez          #+#    #+#             */
-/*   Updated: 2024/04/17 12:15:17 by dximenez         ###   ########.fr       */
+/*   Updated: 2024/04/17 12:32:17 by dximenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static void	ft_usleep(int ms)
+void	ft_usleep(int ms)
 {
 	long int	time;
 
@@ -84,7 +84,7 @@ void	init_program(t_program *pr, int amount, int ac, char *av[])
 	pr->dead_flag = 0;
 	pr->time_to_die = ft_atoi(av[2]);
 	pr->time_to_eat = ft_atoi(av[3]);
-	pr->time_to_eat = ft_atoi(av[4]);
+	pr->time_to_sleep = ft_atoi(av[4]);
 	if (ac == 6)
 		pr->num_meals = ft_atoi(av[5]);
 	else
