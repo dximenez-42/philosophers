@@ -6,13 +6,13 @@
 /*   By: dximenez <dximenez@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 19:24:00 by dximenez          #+#    #+#             */
-/*   Updated: 2024/04/16 20:08:29 by dximenez         ###   ########.fr       */
+/*   Updated: 2024/04/17 12:15:17 by dximenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	ft_usleep(int ms)
+static void	ft_usleep(int ms)
 {
 	long int	time;
 
@@ -28,15 +28,13 @@ void	*init_thread(void *arg)
 
 	ph = arg;
 	if (ph->id % 2 == 0)
-		ft_usleep(ph->pr->time_to_eat / 10);
+		ft_usleep(ph->pr->time_to_eat / 100);
 	ph->last_meal = get_time();
 	ph->time_remain = ph->last_meal + ph->pr->time_to_die;
 	if (pthread_create(&thread, NULL, alive_checker, ph) != 0)
 		return ((void *) 1);
 	if (pthread_create(&thread, NULL, meals_checker, ph) != 0)
 		return ((void *) 1);
-	// if (ph->id % 2 == 0)
-	// 	usleep(100000);
 	while (1)
 		perform_actions(ph->pr, ph);
 }
