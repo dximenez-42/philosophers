@@ -33,7 +33,7 @@ void	show_message(t_program *pr, t_philo *ph, int type)
 	else if (type == SLEEP)
 		printf("%d is sleeping\n", ph->id);
 	else if (type == DEAD)
-		printf("%d died\n", ph->id);
+		(printf("%d died\n", ph->id), exit(1));
 	pthread_mutex_unlock(&pr->write_lock);
 }
 

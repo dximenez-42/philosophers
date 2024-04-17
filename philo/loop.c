@@ -6,7 +6,7 @@
 /*   By: dximenez <dximenez@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 18:51:23 by dximenez          #+#    #+#             */
-/*   Updated: 2024/04/17 18:03:21 by dximenez         ###   ########.fr       */
+/*   Updated: 2024/04/17 20:30:16 by dximenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,29 +28,29 @@ void	*alive_checker(void *p)
 			return (NULL);
 		}
 		pthread_mutex_unlock(&ph->pause);
-		usleep(1000);
+		usleep(100);
+		// usleep(10);
 	}
-}
-
-void	*meals_checker(void *p)
-{
-	return (NULL);
 }
 
 void	*init_thread(void *arg)
 {
 	pthread_t	thread;
 	t_philo		*ph;
+	long long	i;
 
 	ph = arg;
+	i = -1;
 	if (ph->id % 2 == 0)
 		ft_usleep(ph->pr->time_to_eat / 100);
 	ph->last_meal = get_time();
 	ph->time_remain = ph->last_meal + ph->pr->time_to_die;
 	if (pthread_create(&thread, NULL, alive_checker, ph) != 0)
 		return ((void *) 1);
-	if (pthread_create(&thread, NULL, meals_checker, ph) != 0)
-		return ((void *) 1);
-	while (1)
+	while (ph->pr->num_meals == -1 || ++i < ph->pr->num_meals)
+	{
 		perform_actions(ph->pr, ph);
+		// ft_usleep(ph->pr->time_to_die);
+	}
+	return (NULL);
 }
