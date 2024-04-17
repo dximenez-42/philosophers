@@ -6,7 +6,7 @@
 /*   By: dximenez <dximenez@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 13:43:25 by dximenez          #+#    #+#             */
-/*   Updated: 2024/04/17 12:16:26 by dximenez         ###   ########.fr       */
+/*   Updated: 2024/04/17 18:01:56 by dximenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	show_message(t_program *pr, t_philo *ph, int type)
 	else if (type == SLEEP)
 		printf("%d is sleeping\n", ph->id);
 	else if (type == DEAD)
-		(printf("%d died\n", ph->id), exit(1));
+		printf("%d died\n", ph->id);
 	pthread_mutex_unlock(&pr->write_lock);
 }
 

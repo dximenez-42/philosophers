@@ -6,7 +6,7 @@
 /*   By: dximenez <dximenez@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 19:24:00 by dximenez          #+#    #+#             */
-/*   Updated: 2024/04/17 12:32:17 by dximenez         ###   ########.fr       */
+/*   Updated: 2024/04/17 18:03:13 by dximenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,22 @@ void	ft_usleep(int ms)
 		usleep(ms / 10);
 }
 
-void	*init_thread(void *arg)
+void	init_forks(t_program *pr, size_t i, size_t size)
 {
-	pthread_t	thread;
-	t_philo	*ph;
-
-	ph = arg;
-	if (ph->id % 2 == 0)
-		ft_usleep(ph->pr->time_to_eat / 100);
-	ph->last_meal = get_time();
-	ph->time_remain = ph->last_meal + ph->pr->time_to_die;
-	if (pthread_create(&thread, NULL, alive_checker, ph) != 0)
-		return ((void *) 1);
-	if (pthread_create(&thread, NULL, meals_checker, ph) != 0)
-		return ((void *) 1);
-	while (1)
-		perform_actions(ph->pr, ph);
+	if (size == 1)
+	{
+		pr->philos[i].r_fork = 0;
+		pr->philos[i].l_fork = -1;
+	}
+	if (size > 1)
+	{
+		pr->philos[i].r_fork = i;
+		if (i == 0)
+			pr->philos[i].l_fork = pr->philo_size - 1;
+		else
+			pr->philos[i].l_fork = i - 1;
+	}
+	pthread_mutex_init(&pr->forks[i], NULL);
 }
 
 static int	init_philos(t_program *pr)
@@ -50,20 +50,7 @@ static int	init_philos(t_program *pr)
 	while (++i < size)
 	{
 		pr->philos[i].id = i + 1;
-		if (size == 1)
-		{
-			pr->philos[i].r_fork = 0;
-			pr->philos[i].l_fork = -1;
-		}
-		if (size > 1)
-		{
-			pr->philos[i].r_fork = i;
-			if (i == 0)
-				pr->philos[i].l_fork = pr->philo_size - 1;
-			else
-				pr->philos[i].l_fork = i - 1;
-		}
-		pthread_mutex_init(&pr->forks[i], NULL);
+		init_forks(pr, i, size);
 		pthread_mutex_init(&pr->philos[i].pause, NULL);
 		pr->philos[i].pr = pr;
 		if (pthread_create(&pr->philos[i].thread, NULL,

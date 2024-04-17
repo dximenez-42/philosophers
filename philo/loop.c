@@ -6,7 +6,7 @@
 /*   By: dximenez <dximenez@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 18:51:23 by dximenez          #+#    #+#             */
-/*   Updated: 2024/04/16 12:03:45 by dximenez         ###   ########.fr       */
+/*   Updated: 2024/04/17 18:03:21 by dximenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,22 @@ void	*alive_checker(void *p)
 void	*meals_checker(void *p)
 {
 	return (NULL);
+}
+
+void	*init_thread(void *arg)
+{
+	pthread_t	thread;
+	t_philo		*ph;
+
+	ph = arg;
+	if (ph->id % 2 == 0)
+		ft_usleep(ph->pr->time_to_eat / 100);
+	ph->last_meal = get_time();
+	ph->time_remain = ph->last_meal + ph->pr->time_to_die;
+	if (pthread_create(&thread, NULL, alive_checker, ph) != 0)
+		return ((void *) 1);
+	if (pthread_create(&thread, NULL, meals_checker, ph) != 0)
+		return ((void *) 1);
+	while (1)
+		perform_actions(ph->pr, ph);
 }
