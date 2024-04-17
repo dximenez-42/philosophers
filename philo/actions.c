@@ -6,7 +6,7 @@
 /*   By: dximenez <dximenez@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 15:55:30 by dximenez          #+#    #+#             */
-/*   Updated: 2024/04/17 11:22:30 by dximenez         ###   ########.fr       */
+/*   Updated: 2024/04/17 21:00:11 by dximenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	p_eat(t_program *pr, t_philo *ph)
 	ph->time_remain = ph->last_meal + pr->time_to_die;
 	pthread_mutex_unlock(&ph->pause);
 	show_message(pr, ph, EAT);
-	usleep(pr->time_to_eat * 1000);
+	ft_usleep(pr->time_to_eat);
 	pthread_mutex_lock(&ph->pause);
 	ph->meals_eaten++;
 	pthread_mutex_unlock(&ph->pause);
@@ -46,7 +46,7 @@ static void	p_eat(t_program *pr, t_philo *ph)
 static void	p_sleep(t_program *pr, t_philo *ph)
 {
 	show_message(pr, ph, SLEEP);
-	usleep(pr->time_to_sleep * 1000);
+	ft_usleep(pr->time_to_sleep);
 }
 
 static void	p_think(t_program *pr, t_philo *ph)
