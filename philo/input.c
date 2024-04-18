@@ -6,7 +6,7 @@
 /*   By: dximenez <dximenez@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 18:52:10 by dximenez          #+#    #+#             */
-/*   Updated: 2024/04/14 15:41:16 by dximenez         ###   ########.fr       */
+/*   Updated: 2024/04/18 10:32:01 by dximenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	check_input(int ac, char *av[])
 				return (0);
 			val = ft_atoi(av[i]);
 			if (val <= 0 || val > INT_MAX || (i == 1 && val > MAX_PHILOS)
-				|| (i == 2 || i == 3 || i == 4) && val < 60)
+				|| ((i == 2 || i == 3 || i == 4) && val < 60))
 				return (0);
 			++i;
 		}
