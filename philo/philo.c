@@ -6,7 +6,7 @@
 /*   By: dximenez <dximenez@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 13:43:25 by dximenez          #+#    #+#             */
-/*   Updated: 2024/04/18 10:47:08 by dximenez         ###   ########.fr       */
+/*   Updated: 2024/04/18 10:50:45 by dximenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	show_message(t_program *pr, t_philo *ph, int type)
 	pthread_mutex_unlock(&pr->write_lock);
 }
 
-int main(int ac, char *av[])
+int	main(int ac, char *av[])
 {
 	t_program	pr;
 

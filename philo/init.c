@@ -6,7 +6,7 @@
 /*   By: dximenez <dximenez@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 19:24:00 by dximenez          #+#    #+#             */
-/*   Updated: 2024/04/17 18:03:13 by dximenez         ###   ########.fr       */
+/*   Updated: 2024/04/18 10:50:30 by dximenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static int	init_philos(t_program *pr)
 		pthread_mutex_init(&pr->philos[i].pause, NULL);
 		pr->philos[i].pr = pr;
 		if (pthread_create(&pr->philos[i].thread, NULL,
-			init_thread, &pr->philos[i]) != 0)
+				init_thread, &pr->philos[i]) != 0)
 			return (0);
 	}
 	i = 0;
@@ -66,7 +66,7 @@ static int	init_philos(t_program *pr)
 void	init_program(t_program *pr, int amount, int ac, char *av[])
 {
 	int	i;
-	
+
 	i = 0;
 	pr->dead_flag = 0;
 	pr->time_to_die = ft_atoi(av[2]);

@@ -6,7 +6,7 @@
 /*   By: dximenez <dximenez@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 13:44:31 by dximenez          #+#    #+#             */
-/*   Updated: 2024/04/18 10:46:58 by dximenez         ###   ########.fr       */
+/*   Updated: 2024/04/18 10:51:10 by dximenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@
 # define MAX_PHILOS 200
 
 // Message types
-enum {
+enum
+{
 	EAT,
 	THINK,
 	SLEEP,
