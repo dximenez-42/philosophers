@@ -41,8 +41,8 @@ typedef struct s_philo
 	int					meals_eaten;
 	long long			last_meal;
 	long long			time_remain;
-	size_t				l_fork;
-	size_t				r_fork;
+	ssize_t				l_fork;
+	ssize_t				r_fork;
 	pthread_mutex_t		pause;
 	struct s_program	*pr;
 }						t_philo;
